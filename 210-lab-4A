@@ -1,0 +1,63 @@
+// COMSC-210 | Lab 4A | Mamadou Sissoko
+// IDE used: Visual Studio
+
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+// Color struct stores red, green, and blue RGB values
+struct Color {
+    int red;
+    int green;
+    int blue;
+};
+
+// main() generates a vector of random Color structs and prints them
+// arguments: none
+// returns: 0 on successful execution
+int main() {
+    // Seed the random number generator
+    srand(static_cast<unsigned int>(time(0)));
+
+    // Constants for table formatting and color generation
+    const int MIN_COLORS = 25;    // minimum number of colors
+    const int MAX_COLORS = 50;    // maximum number of colors
+    const int MAX_RGB = 255;      // maximum RGB value
+    const int TABLE_WIDTH = 40;   // width of the table separator
+
+    vector<Color> colors; // vector to hold generated colors
+
+    // Generate a random number of colors between MIN_COLORS and MAX_COLORS
+    int n = rand() % (MAX_COLORS - MIN_COLORS + 1) + MIN_COLORS;
+
+    // Populate the vector with n random colors
+    for (int i = 0; i < n; i++) {
+        Color temp;                     // temporary Color struct
+        temp.red = rand() % (MAX_RGB + 1);   // red value 0-255
+        temp.green = rand() % (MAX_RGB + 1); // green value 0-255
+        temp.blue = rand() % (MAX_RGB + 1);  // blue value 0-255
+        colors.push_back(temp);              // add to vector
+    }
+
+    // Print table header
+    cout << left
+         << setw(10) << "Index"
+         << setw(10) << "Red"
+         << setw(10) << "Green"
+         << setw(10) << "Blue" << endl;
+    cout << string(TABLE_WIDTH, '-') << endl;
+
+    // Print the RGB values of each color in the vector
+    for (size_t i = 0; i < colors.size(); i++) {
+        cout << left
+             << setw(10) << i
+             << setw(10) << colors[i].red
+             << setw(10) << colors[i].green
+             << setw(10) << colors[i].blue << endl;
+    }
+
+    return 0;
+}
